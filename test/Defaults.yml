@@ -52,19 +52,13 @@ pr: none
 # Dependent resources
 resources:
   repositories:
-  # Carpenter is used for build/release pipeline.
-  - repository: Carpenter
-    type: github
-    name: suent/Carpenter.AzurePipelines
-    endpoint: suent
-    ${{ if eq(parameters.stack,'test1') }}:
+  - ${{ if eq(parameters.stack,'test1') }}:
+    # Carpenter is used for build/release pipeline.
+    - repository: Carpenter
+      type: github
+      name: suent/Carpenter.AzurePipelines
+      endpoint: suent
       ref: refs/heads/stack/test1
-    ${{ if eq(parameters.stack,'test2') }}:
-      ref: refs/heads/stack/test2
-    ${{ if eq(parameters.stack,'stable') }}:
-      ref: refs/heads/stack/stable
-    ${{ if eq(parameters.stack,'prod-us') }}:
-      ref: refs/heads/stack/prod-us
 
 
 # Use pipeline template
