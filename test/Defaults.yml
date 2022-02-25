@@ -29,8 +29,14 @@
 parameters:
 
 - name: stack
+  displayName: Stack
   type: string
   default: test1
+  values:
+  - test1
+  - test2
+  - stable
+  - prod-us
 
 
 # Default name for the build, prior to build versioning
@@ -51,7 +57,14 @@ resources:
     type: github
     name: suent/Carpenter.AzurePipelines
     endpoint: suent
-    ref: refs/heads/stack/${{ parameters.stack }}
+    ${{ if eq(parameters.stack,'test1' }}:
+      ref: refs/heads/stack/test1
+    ${{ if eq(parameters.stack,'test2' }}:
+      ref: refs/heads/stack/test2
+    ${{ if eq(parameters.stack,'stable' }}:
+      ref: refs/heads/stack/stable
+    ${{ if eq(parameters.stack,'prod-us' }}:
+      ref: refs/heads/stack/prod-us
 
 
 # Use pipeline template
