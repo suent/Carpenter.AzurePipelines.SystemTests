@@ -26,8 +26,16 @@
 # SPDX-License-Identifier: MIT
 
 
-# Use datecode for test builds
-name: $(Build.DefinitionName)-$(Date:yyyyMMdd)$(Rev:.r)
+parameters:
+
+- name: stack
+  type: string
+  default: test1
+
+
+# Default name for the build, prior to build versioning
+# $(Build.BuildId) is the default value used when YAML cannot be parsed
+name: $(Date:yyyyMMdd)$(Rev:.r)
 
 
 # Configure trigger and pr
@@ -43,9 +51,41 @@ resources:
     type: github
     name: suent/Carpenter.AzurePipelines
     endpoint: suent
-    ref: refs/heads/stack/test1
+    ref: refs/heads/stack/${{ parameters.stack }}
 
 
 # Use pipeline template
 stages:
-- template: Defaults.yml
+- template: templates/carpenter-default.yml@Carpenter
+  parameters:
+
+    # See docs/parameters.md for parameter documentation.
+
+    pipelineVersion: 1
+    includePipeline: false
+    buildPurpose: ${{ parameters.buildPurpose }}
+    project: Carpenter.AzurePipelines
+    defaultPoolType: 'Private'
+    defaultPoolName: 'Default'
+    defaultPoolDemands:
+    - Agent.OS -equals Linux
+    - Agent.OSArchitecture -equals X64
+    #defaultPoolVMImage: 'ubuntu-latest'
+    versionType: SemVer
+    #versionFile: VERSION
+    revisionOffset: 258
+    prereleaseLabel: ${{ parameters.prereleaseLabel }}
+    incrementVersionOnRelease: true
+    buildDotNet: true
+    executeUnitTests: true
+    sonarCloud: true
+    sonarCloudOrganization: suent
+    sonarCloudProjectKey: Suent_Carpenter.AzurePipelines
+    sonarCloudServiceConnection: SonarCloudAnalysis1
+    deployBranch: 'test1,test2,stable,prod_us'
+    deployNuGet: 'dev,stable,prod_us'
+    nuGetTargetFeedDev: AzureArtifacts
+    #nuGetTargetFeedTest1:
+    #nuGetTargetFeedTest2:
+    nuGetTargetFeedStable: github.com
+    nuGetTargetFeedProdUS: nuget.org
