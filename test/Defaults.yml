@@ -57,13 +57,13 @@ resources:
     type: github
     name: suent/Carpenter.AzurePipelines
     endpoint: suent
-    ${{ if eq(parameters.stack,'test1' }}:
+    ${{ if eq(parameters.stack,'test1') }}:
       ref: refs/heads/stack/test1
-    ${{ if eq(parameters.stack,'test2' }}:
+    ${{ if eq(parameters.stack,'test2') }}:
       ref: refs/heads/stack/test2
-    ${{ if eq(parameters.stack,'stable' }}:
+    ${{ if eq(parameters.stack,'stable') }}:
       ref: refs/heads/stack/stable
-    ${{ if eq(parameters.stack,'prod-us' }}:
+    ${{ if eq(parameters.stack,'prod-us') }}:
       ref: refs/heads/stack/prod-us
 
 
