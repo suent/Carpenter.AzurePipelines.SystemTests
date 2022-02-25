@@ -26,19 +26,27 @@
 # SPDX-License-Identifier: MIT
 
 
-parameters:
+# Use datecode for test builds
+name: $(Build.DefinitionName)-$(Date:yyyyMMdd)$(Rev:.r)
 
-- name: stack
-  displayName: Stack
-  type: string
-  default: test1
-  values:
-  - test1
-  - test2
-  - stable
-  - prod-us
+
+# Configure trigger and pr
+trigger: none
+pr: none
+
+
+# Dependent resources
+resources:
+  repositories:
+  - ${{ if eq(parameters.stack,'test1') }}:
+    # Carpenter is used for build/release pipeline.
+    - repository: Carpenter
+      type: github
+      name: suent/Carpenter.AzurePipelines
+      endpoint: suent
+      ref: refs/heads/stack/test1
 
 
 # Use pipeline template
 stages:
-- template: templates/carpenter-default.yml@Carpenter
+- template: Defaults.yml
