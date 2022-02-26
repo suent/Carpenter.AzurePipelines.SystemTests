@@ -30,7 +30,11 @@ name: $(Build.DefinitionName)-$(Date:yyyyMMdd)$(Rev:.r)
 
 
 # Configure trigger and pr
-#trigger: none
+trigger:
+  batch: false
+  branches:
+    include:
+    - main
 pr: none
 
 
