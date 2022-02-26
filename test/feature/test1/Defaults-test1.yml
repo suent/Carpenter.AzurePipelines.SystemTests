@@ -48,4 +48,4 @@ resources:
 
 # Use pipeline template
 stages:
-- template: Defaults.yml
+- template: ../Defaults.yml
