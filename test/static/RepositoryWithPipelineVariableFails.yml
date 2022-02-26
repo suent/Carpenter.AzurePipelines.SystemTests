@@ -47,3 +47,8 @@ resources:
     name: suent/Carpenter.PipelineTests
     endpoint: suent
     ref: $(Build.SourceBranch)
+
+
+# Use pipeline template
+stages:
+- template: ../Defaults.yml
