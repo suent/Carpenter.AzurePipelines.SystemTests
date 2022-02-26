@@ -49,6 +49,8 @@ resources:
     ref: $(Build.SourceBranch)
 
 
-# Use pipeline template
+
+# Use Defaults template with no parameters
+# to give this test valid stages
 stages:
-- template: ../Defaults.yml
+- template: ../feature/Defaults.yml@Carpenter

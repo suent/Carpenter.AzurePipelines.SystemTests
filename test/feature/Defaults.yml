@@ -25,19 +25,7 @@
 # SPDX-License-Identifier: MIT
 
 
-parameters:
-
-- name: stack
-  displayName: Stack
-  type: string
-  default: test1
-  values:
-  - test1
-  - test2
-  - stable
-  - prod-us
-
-
-# Use pipeline template
+# Use carpenter-default template with no parameters
+# to verify that the default parameters will execute the pipeline.
 stages:
 - template: templates/carpenter-default.yml@Carpenter
