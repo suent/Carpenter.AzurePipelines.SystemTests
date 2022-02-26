@@ -24,27 +24,3 @@
 
 # SPDX-License-Identifier: MIT
 
-
-# Use datecode for test builds
-name: $(Build.DefinitionName)-$(Date:yyyyMMdd)$(Rev:.r)
-
-
-# Configure trigger and pr
-#trigger: none
-pr: none
-
-
-# Dependent resources
-resources:
-  repositories:
-  # Carpenter is used for build/release pipeline.
-  - repository: Carpenter
-    type: github
-    name: suent/Carpenter.AzurePipelines
-    endpoint: suent
-    ref: refs/heads/stack/test1
-
-
-# Use pipeline template
-stages:
-- template: ../Defaults.yml
