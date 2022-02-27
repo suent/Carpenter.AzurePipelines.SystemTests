@@ -1,0 +1,6 @@
+stages:
+- stage: emptyStage
+  jobs:
+  - job: emptyJob
+    steps:
+    - template: templates/steps/display-environment.yml@Carpenter
