@@ -46,7 +46,7 @@ resources:
     type: github
     name: suent/Carpenter.AzurePipelines
     endpoint: suent
-    ref: refs/heads/stack/prod-us
+    ref: refs/heads/stack/prod
 
 stages:
 - template: ../templates/empty-stage.yml
