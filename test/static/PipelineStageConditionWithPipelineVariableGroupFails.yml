@@ -49,4 +49,5 @@ resources:
     ref: refs/heads/stack/prod
 
 stages:
-- template: ../templates/empty-stage.yml
+- ${{ if eq(variables['TestVariable1'],'VariableGroup') }}:
+  - template: ../templates/empty-stage.yml
